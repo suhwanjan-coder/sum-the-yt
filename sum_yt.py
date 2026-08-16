@@ -341,7 +341,10 @@ def _claude(instruction: str, stdin_payload: str, claude_model: str | None) -> s
     cmd = ["claude", "-p", instruction]
     if claude_model:
         cmd += ["--model", claude_model]
-    proc = subprocess.run(cmd, input=stdin_payload, text=True, capture_output=True)
+    proc = subprocess.run(
+        cmd, input=stdin_payload, text=True, capture_output=True,
+        encoding="utf-8", errors="replace",
+    )
     if proc.returncode != 0:
         raise RuntimeError(f"claude CLI failed (exit {proc.returncode}):\n{proc.stderr}")
     return proc.stdout.strip()
