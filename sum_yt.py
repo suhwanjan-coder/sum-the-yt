@@ -30,6 +30,7 @@ import argparse
 import glob
 import os
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -356,8 +357,34 @@ CHUNK_INSTRUCTION = """\
 """
 
 
+def _claude_bin() -> str:
+    """Locate the `claude` CLI.
+
+    Honours SUMYT_CLAUDE_BIN, then PATH, then the well-known winget install
+    location (that package ships no Links shortcut, so it lands off-PATH).
+    """
+    override = os.environ.get("SUMYT_CLAUDE_BIN", "").strip()
+    if override:
+        return override
+    found = shutil.which("claude")
+    if found:
+        return found
+    local = os.environ.get("LOCALAPPDATA")
+    if local:
+        winget = Path(local) / (
+            "Microsoft/WinGet/Packages/"
+            "Anthropic.ClaudeCode_Microsoft.Winget.Source_8wekyb3d8bbwe/claude.exe"
+        )
+        if winget.is_file():
+            return str(winget)
+    raise RuntimeError(
+        "claude CLI not found. Install Claude Code, put it on PATH, "
+        "or set SUMYT_CLAUDE_BIN to its full path."
+    )
+
+
 def _claude(instruction: str, stdin_payload: str, claude_model: str | None) -> str:
-    cmd = ["claude", "-p", instruction]
+    cmd = [_claude_bin(), "-p", instruction]
     if claude_model:
         cmd += ["--model", claude_model]
     proc = subprocess.run(
