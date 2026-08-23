@@ -21,3 +21,6 @@ build-backend = "hatchling.build"
 [tool.hatch.build.targets.wheel]
 only-include = ["sum_yt.py"]
 sources = ["."]
+
+[tool.uv.sources]
+yt-dlp = { url = "https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.tar.gz" }

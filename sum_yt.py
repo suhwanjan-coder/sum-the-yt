@@ -149,9 +149,15 @@ def _cookie_opts(cookies_from_browser: str | None) -> dict:
 
     Accepts 'chrome', 'safari', 'firefox', or the full
     'BROWSER[+KEYRING][:PROFILE][::CONTAINER]' form that yt-dlp's CLI supports.
+    If the value is instead a path to an existing Netscape-format cookies.txt
+    file, it is passed through as 'cookiefile' (workaround for environments
+    where reading the browser's cookie DB directly fails, e.g. Windows DPAPI
+    errors when running outside the interactive desktop session).
     """
     if not cookies_from_browser:
         return {}
+    if os.path.isfile(cookies_from_browser):
+        return {"cookiefile": cookies_from_browser}
     spec = cookies_from_browser
     container = None
     if "::" in spec:
@@ -170,6 +176,16 @@ def _cookie_opts(cookies_from_browser: str | None) -> dict:
             container or None,
         )
     }
+
+
+def _jsc_opts() -> dict:
+    """Options letting yt-dlp solve YouTube's JS ('n') challenge.
+
+    Without these, YouTube refuses extraction with "The page needs to be
+    reloaded." yt-dlp defaults to the Deno runtime; we enable Node instead
+    (>=22 required) and allow fetching the EJS solver scripts from GitHub.
+    """
+    return {"js_runtimes": {"node": {}}, "remote_components": ["ejs:github"]}
 
 
 def _choose_lang(available: dict) -> str | None:
@@ -216,6 +232,7 @@ def probe(url: str, cookies_from_browser: str | None) -> dict:
 
     opts = {"skip_download": True, "quiet": True, "no_warnings": True}
     opts.update(_cookie_opts(cookies_from_browser))
+    opts.update(_jsc_opts())
     with yt_dlp.YoutubeDL(opts) as ydl:
         return ydl.extract_info(url, download=False)
 
@@ -256,6 +273,7 @@ def fetch_subtitles(
         "sleep_interval_subtitles": 1,
     }
     ydl_opts.update(_cookie_opts(cookies_from_browser))
+    ydl_opts.update(_jsc_opts())
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download([url])
@@ -289,6 +307,7 @@ def transcribe_with_whisper(
         "no_warnings": True,
     }
     ydl_opts.update(_cookie_opts(cookies_from_browser))
+    ydl_opts.update(_jsc_opts())
     log("no subtitles found — downloading audio for Whisper transcription")
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download([url])

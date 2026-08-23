@@ -144,7 +144,7 @@ name = "exceptiongroup"
 version = "1.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "typing-extensions", marker = "python_full_version < '3.11'" },
+    { name = "typing-extensions" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/50/79/66800aadf48771f6b62f7eb014e352e5d06856655206165d775e675a02c9/exceptiongroup-1.3.1.tar.gz", hash = "sha256:8b412432c6055b0b7d14c310000ae93352ed6754f70fa8f7c34141f91c4e3219", size = 30371, upload-time = "2025-11-21T23:01:54.787Z" }
 wheels = [
@@ -478,11 +478,11 @@ resolution-markers = [
     "python_full_version < '3.11'",
 ]
 dependencies = [
-    { name = "flatbuffers", marker = "python_full_version < '3.11'" },
-    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
-    { name = "packaging", marker = "python_full_version < '3.11'" },
-    { name = "protobuf", marker = "python_full_version < '3.11'" },
-    { name = "sympy", marker = "python_full_version < '3.11'" },
+    { name = "flatbuffers" },
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" } },
+    { name = "packaging" },
+    { name = "protobuf" },
+    { name = "sympy" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/15/41/3253db975a90c3ce1d475e2a230773a21cd7998537f0657947df6fb79861/onnxruntime-1.24.3-cp311-cp311-macosx_14_0_arm64.whl", hash = "sha256:3e6456801c66b095c5cd68e690ca25db970ea5202bd0c5b84a2c3ef7731c5a3c", size = 17332766, upload-time = "2026-03-05T17:18:59.714Z" },
@@ -519,10 +519,10 @@ resolution-markers = [
     "python_full_version >= '3.11'",
 ]
 dependencies = [
-    { name = "flatbuffers", marker = "python_full_version >= '3.11'" },
-    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "packaging", marker = "python_full_version >= '3.11'" },
-    { name = "protobuf", marker = "python_full_version >= '3.11'" },
+    { name = "flatbuffers" },
+    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" } },
+    { name = "packaging" },
+    { name = "protobuf" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/d4/e4/5353d7e09ced4a8f473f843223fc75d726b2b5519dcefc12f22a6c92852d/onnxruntime-1.27.0-cp311-cp311-macosx_14_0_arm64.whl", hash = "sha256:8ba14a38c570087f3cdb8cfba33f7a38a1e826c1e5b29e17c28ceda0cc910016", size = 18416484, upload-time = "2026-06-15T22:43:43.894Z" },
@@ -725,7 +725,7 @@ requires-dist = [
     { name = "faster-whisper", specifier = ">=1.0.0" },
     { name = "pip-system-certs", specifier = ">=5.3" },
     { name = "python-dotenv", specifier = ">=1.0.0" },
-    { name = "yt-dlp", specifier = ">=2024.1.0" },
+    { name = "yt-dlp", url = "https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.tar.gz" },
 ]
 
 [[package]]
@@ -733,7 +733,7 @@ name = "sympy"
 version = "1.14.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "mpmath", marker = "python_full_version < '3.11'" },
+    { name = "mpmath" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/83/d3/803453b36afefb7c2bb238361cd4ae6125a569b4db67cd9e79846ba2d68c/sympy-1.14.0.tar.gz", hash = "sha256:d3d3fe8df1e5a0b42f0e7bdf50541697dbe7d23746e894990c030e2b05e72517", size = 7793921, upload-time = "2025-04-27T18:05:01.611Z" }
 wheels = [
@@ -805,9 +805,48 @@ wheels = [
 
 [[package]]
 name = "yt-dlp"
-version = "2026.6.9"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/88/a4/1b0979d28f87774bb67fbbc66bce44f9dd1aa0e547a99e22985fac945c33/yt_dlp-2026.6.9.tar.gz", hash = "sha256:d50fcb95f48d61bedde33e408c1881d4c279e51c31354a599ce09e96ba0f4b86", size = 3030590, upload-time = "2026-06-09T23:27:14.831Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/f3/ee/188a3dadf9dfdac713243521f919feca1cd091d4358c9ea7e8ebb710a7cc/yt_dlp-2026.6.9-py3-none-any.whl", hash = "sha256:442ba4c75724b9496144c8434b617962ee08d0ee7c26ec663848fe9b78d5a3e4", size = 3169035, upload-time = "2026-06-09T23:27:12.58Z" },
+version = "2026.8.19"
+source = { url = "https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.tar.gz" }
+sdist = { hash = "sha256:072aad4f2a7604e92155f61a275a4752dc64046c8f6d90df3710525d94cd37c1" }
+
+[package.metadata]
+requires-dist = [
+    { name = "brotli", marker = "implementation_name == 'cpython' and sys_platform != 'ios' and extra == 'default'" },
+    { name = "brotli", marker = "implementation_name == 'cpython' and sys_platform != 'ios' and extra == 'pin'", specifier = "==1.2.0" },
+    { name = "brotlicffi", marker = "implementation_name != 'cpython' and extra == 'default'" },
+    { name = "brotlicffi", marker = "implementation_name != 'cpython' and extra == 'pin'", specifier = "==1.2.0.1" },
+    { name = "certifi", marker = "implementation_name == 'cpython' and extra == 'pin-curl-cffi'", specifier = "==2026.7.22" },
+    { name = "certifi", marker = "extra == 'default'" },
+    { name = "certifi", marker = "extra == 'pin'", specifier = "==2026.7.22" },
+    { name = "cffi", marker = "platform_python_implementation != 'PyPy' and extra == 'pin-secretstorage'", specifier = "==2.1.1" },
+    { name = "cffi", marker = "implementation_name == 'cpython' and extra == 'pin-curl-cffi'", specifier = "==2.1.1" },
+    { name = "charset-normalizer", marker = "extra == 'pin'", specifier = "==3.5.0" },
+    { name = "cryptography", marker = "extra == 'pin-secretstorage'", specifier = "==50.0.0" },
+    { name = "curl-cffi", marker = "implementation_name == 'cpython' and extra == 'curl-cffi'", specifier = ">=0.5.10,!=0.6.*,!=0.7.*,!=0.8.*,!=0.9.*,<0.17" },
+    { name = "curl-cffi", marker = "implementation_name == 'cpython' and extra == 'pin-curl-cffi'", specifier = "==0.16.0" },
+    { name = "deno", marker = "extra == 'deno'", specifier = ">=2.6.6" },
+    { name = "deno", marker = "extra == 'pin-deno'", specifier = "==2.9.5" },
+    { name = "idna", marker = "extra == 'pin'", specifier = "==3.18" },
+    { name = "jeepney", marker = "extra == 'pin-secretstorage'", specifier = "==0.9.0" },
+    { name = "mutagen", marker = "extra == 'default'" },
+    { name = "mutagen", marker = "extra == 'pin'", specifier = "==1.48.1" },
+    { name = "pycparser", marker = "implementation_name != 'PyPy' and platform_python_implementation != 'PyPy' and extra == 'pin-secretstorage'", specifier = "==3.0" },
+    { name = "pycparser", marker = "implementation_name == 'cpython' and extra == 'pin-curl-cffi'", specifier = "==3.0" },
+    { name = "pycryptodomex", marker = "extra == 'default'" },
+    { name = "pycryptodomex", marker = "extra == 'pin'", specifier = "==3.23.0" },
+    { name = "requests", marker = "extra == 'default'", specifier = ">=2.32.2,<3" },
+    { name = "requests", marker = "extra == 'pin'", specifier = "==2.34.2" },
+    { name = "secretstorage", marker = "extra == 'pin-secretstorage'", specifier = "==3.5.0" },
+    { name = "secretstorage", marker = "extra == 'secretstorage'" },
+    { name = "typing-extensions", marker = "python_full_version < '3.11' and extra == 'curl-cffi'" },
+    { name = "typing-extensions", marker = "python_full_version < '3.11' and extra == 'pin-curl-cffi'", specifier = "==4.16.0" },
+    { name = "typing-extensions", marker = "python_full_version < '3.11' and extra == 'pin-secretstorage'", specifier = "==4.16.0" },
+    { name = "urllib3", marker = "extra == 'default'", specifier = ">=2.0.2,<3" },
+    { name = "urllib3", marker = "extra == 'pin'", specifier = "==2.7.0" },
+    { name = "websockets", marker = "python_full_version >= '3.11' and extra == 'pin'", specifier = "==17.0.1" },
+    { name = "websockets", marker = "python_full_version < '3.11' and extra == 'pin'", specifier = "==16.1.1" },
+    { name = "websockets", marker = "extra == 'default'", specifier = ">=13.0" },
+    { name = "yt-dlp-ejs", marker = "extra == 'default'", specifier = "==0.8.0" },
+    { name = "yt-dlp-ejs", marker = "extra == 'pin'", specifier = "==0.8.0" },
 ]
+provides-extras = ["curl-cffi", "default", "deno", "pin", "pin-curl-cffi", "pin-deno", "pin-secretstorage", "secretstorage"]
