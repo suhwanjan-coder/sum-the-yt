@@ -16,7 +16,7 @@ dist/
 .DS_Store
 
 # Generated artifacts (uncomment to keep summaries out of git)
-# videos/
+videos/
 
 # Scratch test logs
 *.err
